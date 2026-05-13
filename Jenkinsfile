@@ -29,10 +29,9 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sh "kubectl apply -f k8s/deployment.yaml"
-                sh "kubectl apply -f k8s/service.yaml"
-            }
-        }
+    steps {
+        sh 'echo Deployment Stage Skipped'
+    }
+}
     }
 }
