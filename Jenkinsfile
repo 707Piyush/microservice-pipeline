@@ -13,18 +13,15 @@ pipeline {
             }
         }
         stage('Push') {
-            steps {
-                echo 'Pushing image to Docker Hub...'
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-credentials',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                    sh "docker push ${DOCKER_IMAGE}:latest"
-                }
-            }
+    steps {
+        echo 'Pushing image to Docker Hub...'
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+            sh 'docker push piyushgupta7781/microservice-app:build-3'
+            sh 'docker push piyushgupta7781/microservice-app:latest'
+        }
+    }
+}
         }
         stage('Deploy') {
             steps {
