@@ -1,31 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: microservice-app
-
 spec:
   replicas: 2
-
   selector:
     matchLabels:
       app: microservice-app
-
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-
   template:
     metadata:
       labels:
         app: microservice-app
-
     spec:
       containers:
       - name: microservice-app
         image: piyushgupta7781/microservice-app:latest
-
         ports:
         - containerPort: 3000
