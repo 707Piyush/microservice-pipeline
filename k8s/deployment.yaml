@@ -22,3 +22,22 @@ spec:
         image: piyushgupta7781/microservice-app:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: VERSION
+          value: "v2"
+        - name: SERVICE_NAME
+          value: "microservice-app"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
